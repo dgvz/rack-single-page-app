@@ -22,15 +22,25 @@ gem 'rack-single-page-app', :require => 'rack/single_page_app'
 
 ## Configuration
 
-### Rack
+### Static Index Page
 
-In `config.ru`, configure `Rack::SinglePageApp` by passing the destination file to the constructor:
+In `config.ru`, configure `Rack::SinglePageApp::Index` by passing the destination file to the constructor:
 
 ```ruby
-run Rack::SinglePageApp.new("public/index.html")
+run Rack::SinglePageApp::Index.new("public/index.html")
 ```
 
 Generally, you'll run `Rack::Static` higher up in your `config.ru` so that you deliver static assets prior to single-page-app fall-through.
+
+### Mustache Templates
+
+Use `Rack::SinglePageApp::Template` to compile the static output from a Mustache template. Pass the path to the template and a context object to the constructor:
+
+```ruby
+run Rack::SinglePageApp::Index.new("templates/index.html", context)
+```
+
+Note that this template will be compiled once in-memory when the app starts up, and the content will be static for the lifetime of the app.
 
 ### Testing
 
