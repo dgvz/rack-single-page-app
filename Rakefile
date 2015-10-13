@@ -8,6 +8,7 @@ rescue Bundler::BundlerError => ex
   exit e.status_code
 end
 
+require "bundler/gem_tasks"
 require 'rdoc/task'
 require 'rake/testtask'
 require 'git-version-bump/rake-tasks'
